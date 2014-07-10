@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-hello, JSP
+hello, Spring JSP
 </body>
 </html>
