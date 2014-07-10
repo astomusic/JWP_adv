@@ -3,6 +3,9 @@
 .classpath
 .settings
 
+.springBeans
+.metadata/*
+
 bin/*
 target/*
 release.properties
