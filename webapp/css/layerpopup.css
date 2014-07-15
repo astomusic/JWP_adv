@@ -1,0 +1,34 @@
+/* Popup Layer */
+.layer {
+	display: none;
+	position: fixed;
+	_position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.open {
+	display: block;
+}
+
+.layer .bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: .5;
+	filter: alpha(opacity = 50);
+}
+
+.layer_area {
+	padding: 0px 30px;
+	z-index: 2;
+	background: #fff;
+	position: fixed;
+	z-index: 2;
+}

@@ -10,7 +10,7 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home() {
-		logger.info("test");
+		logger.info("homepage loading success!");
 		// /home.jps (prefix + name + suffix)
 		return "home";
 	}

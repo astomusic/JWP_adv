@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JWP_adv</title>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/layerpopup.css" rel="stylesheet">
 
 </head>
 <body>
@@ -30,7 +31,10 @@
 					<div class="form-group">
 						<input type="password" placeholder="Password" class="form-control">
 					</div>
-					<button type="submit" class="btn btn-success">Sign in</button>
+					<button type="submit" class="btn btn-success" href="/users/form">Sign
+						in</button>
+					<button type="submit" class="btn btn-primary" id="layer_open">Sign
+						up</button>
 				</form>
 			</div>
 		</div>
@@ -95,9 +99,40 @@
 			<p>&copy; Company 2014</p>
 		</footer>
 	</div>
+
+	<div class="layer" style="display: none;">
+		<div class="bg"></div>
+		<div class="layer_area" id="layer1">
+			<h3>Sign up</h3>
+			<form class="form-horizontal" role="form" action="/users" method="post">
+				<div class="form-group">
+					<input type="text" placeholder="Email" name="email"
+						class="form-control">
+				</div>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password"
+						class="form-control">
+				</div>
+				<div class="form-group">
+					<input type="password" placeholder="Password Confirm" name="passwordConfirm"
+						class="form-control">
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary" id="">Submit</button>
+						<button class="btn btn-danger" id="layer_close">Close</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/layerpopup.js">
+		
+	</script>
 </body>
 </html>

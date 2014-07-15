@@ -8,7 +8,9 @@
 
 bin/*
 target/*
+
 release.properties
+src/test/*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
