@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS USERS;
+CREATE TABLE USERS (
+	email VARCHAR(50) NOT NULL,
+	password VARCHAR(20) NOT NULL,
+	passwordConfirm VARCHAR(20)	NOT NULL,
+	
+	PRIMARY KEY (email)
+);
+
+INSERT INTO USERS VALUES('asto@as.com', 'test', 'test');
