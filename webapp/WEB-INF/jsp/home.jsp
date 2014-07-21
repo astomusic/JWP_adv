@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
 					<div class="form-group">
 						<input type="password" placeholder="Password" class="form-control">
 					</div>
-					<button type="submit" class="btn btn-success" href="/users/form">Sign
+					<button type="submit" class="btn btn-success" href="#">Sign
 						in</button>
 					<button type="submit" class="btn btn-primary" id="layer_open">Sign
 						up</button>
@@ -104,18 +105,15 @@
 		<div class="bg"></div>
 		<div class="layer_area" id="layer1">
 			<h3>Sign up</h3>
-			<form class="form-horizontal" role="form" action="/users" method="post">
+			<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="post">
 				<div class="form-group">
-					<input type="text" placeholder="Email" name="email"
-						class="form-control">
+					<form:input path="email" class="form-control" placeholder="Email" />
 				</div>
 				<div class="form-group">
-					<input type="password" placeholder="Password" name="password"
-						class="form-control">
+					<form:password path="password" class="form-control" placeholder="Password" />
 				</div>
 				<div class="form-group">
-					<input type="password" placeholder="Password Confirm" name="passwordConfirm"
-						class="form-control">
+					<form:password path="passwordConfirm" class="form-control" placeholder="Password Confirm" />
 				</div>
 				<br>
 				<div class="form-group">
@@ -124,7 +122,7 @@
 						<button class="btn btn-danger" id="layer_close">Close</button>
 					</div>
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 	<!-- /container -->

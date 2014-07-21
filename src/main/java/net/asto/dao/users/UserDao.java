@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import net.asto.domain.users.User;
 
+import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -14,11 +15,13 @@ import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 public class UserDao extends JdbcDaoSupport {
+	public static Logger logger = Logger.getLogger(UserDao.class);
 	@PostConstruct
 	public void initialize() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("asto.sql"));
 		DatabasePopulatorUtils.execute(populator, getDataSource());
+		logger.info("database initialized success");
 	}
 
 	public User findByEmail(String email) {
