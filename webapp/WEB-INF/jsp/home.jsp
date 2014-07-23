@@ -108,17 +108,20 @@
 			<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="post">
 				<div class="form-group">
 					<form:input path="email" class="form-control" placeholder="Email" />
+					<form:errors path="email" cssClass="error" />
 				</div>
 				<div class="form-group">
 					<form:password path="password" class="form-control" placeholder="Password" />
+					<form:errors path="password" cssClass="error" />
 				</div>
 				<div class="form-group">
 					<form:password path="passwordConfirm" class="form-control" placeholder="Password Confirm" />
+					<form:errors path="passwordConfirm" cssClass="error" />
 				</div>
 				<br>
 				<div class="form-group">
 					<div class="controls">
-						<button type="submit" class="btn btn-primary" id="">Submit</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
 						<button class="btn btn-danger" id="layer_close">Close</button>
 					</div>
 				</div>

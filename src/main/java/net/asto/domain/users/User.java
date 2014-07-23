@@ -1,19 +1,36 @@
 package net.asto.domain.users;
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Size;
+
+import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
+	public static Logger logger = Logger.getLogger(User.class);
+	
+	@NotEmpty @Size(max=50)  @Email 
 	private String email;
+	
+	@NotEmpty @Size(min=4, max=20) 
 	private String password;
+	
+	@NotEmpty @Size(min=4, max=20)
 	private String passwordConfirm;
+	
+	@AssertTrue
+	private boolean passwordCheck;
 
 	public User() {
-
 	}
 	
 	public User(String email, String password, String passwordConfirm) {
 		this.email = email;
 		this.password = password;
 		this.passwordConfirm = passwordConfirm;
-	}
+	}	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -31,6 +48,7 @@ public class User {
 	}
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+		this.passwordCheck = this.password.equals(this.passwordConfirm);
 	}
 	
 	
