@@ -6,6 +6,9 @@
 .springBeans
 .metadata/*
 
+.idea
+*.imi
+
 bin/*
 target/*
 
