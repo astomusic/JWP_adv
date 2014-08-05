@@ -2,6 +2,7 @@ package net.asto.web.users;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import net.asto.dao.users.UserDao;
@@ -45,7 +46,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/users/login", method=RequestMethod.POST)
-	public String login(@Valid Authenticate authenticate, BindingResult bindingResult, Model model) {
+	public String login(@Valid Authenticate authenticate, BindingResult bindingResult, HttpSession session, Model model) {
 		if(bindingResult.hasErrors()) {
 			logger.info("bindingResult has error");
 			List<ObjectError> errors = bindingResult.getAllErrors();
@@ -69,9 +70,17 @@ public class UserController {
 		}
 		
 		//TODO 세션에 사용자 정보를 저장
+		session.setAttribute("email", user.getEmail());
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value="/users/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("email");
+		return "redirect:/";
+	}
+		
 	
 	public void setErrorMessage(String errorMessage, Model model) {
 		model.addAttribute("user", new User());

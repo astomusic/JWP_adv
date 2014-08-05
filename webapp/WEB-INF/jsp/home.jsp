@@ -26,6 +26,7 @@
 				<a class="navbar-brand" href="#">ASTOMUSIC</a>
 			</div>
 			<div class="navbar-collapse collapse">
+				<c:if test="${empty sessionScope.email}">
 				<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/login" method="post">
 					<div class="form-group">
 						<c:if test="${not empty errorMessage}">
@@ -40,9 +41,18 @@
 					</div>
 					<button type="submit" class="btn btn-success">Sign
 						in</button>
-						<button type="submit" class="btn btn-primary" id="layer_open">Sign
+					<button type="submit" class="btn btn-primary" id="layer_open">Sign
 						up</button>
 				</form:form>
+				</c:if>
+				<c:if test="${not empty sessionScope.email}">
+					<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/logout" method="post">
+						<button type="submit" class="btn btn-danger">Logout</button>
+					</form:form>
+					<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/${sessionScope.email}" method="post">
+						<button type="submit" class="btn btn-success">${sessionScope.email}</button>
+					</form:form>
+				</c:if>
 			</div>
 		</div>
 	</div>
