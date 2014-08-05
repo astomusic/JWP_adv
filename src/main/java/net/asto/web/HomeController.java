@@ -1,5 +1,6 @@
 package net.asto.web;
 
+import net.asto.domain.users.Authenticate;
 import net.asto.domain.users.User;
 
 import org.apache.log4j.Logger;
@@ -14,8 +15,9 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		model.addAttribute("user", new User());
+		model.addAttribute("authenticate", new Authenticate());
 		logger.info("homepage loading start");
-		// /home.jps (prefix + name + suffix)
-		return "home";
+		
+		return "home";// /home.jps (prefix + name + suffix)
 	}
 }

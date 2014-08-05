@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,18 +26,23 @@
 				<a class="navbar-brand" href="#">ASTOMUSIC</a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" role="form">
+				<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/login" method="post">
 					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
+						<c:if test="${not empty errorMessage}">
+							<span style="color:red">${errorMessage}</span>
+						</c:if>
+						<form:input path="email" class="form-control" placeholder="Email" />
+						<form:errors path="email" cssClass="error" />
 					</div>
 					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
+						<form:password path="password" class="form-control" placeholder="Password" />
+						<form:errors path="password" cssClass="error" />
 					</div>
-					<button type="submit" class="btn btn-success" href="#">Sign
+					<button type="submit" class="btn btn-success">Sign
 						in</button>
-					<button type="submit" class="btn btn-primary" id="layer_open">Sign
+						<button type="submit" class="btn btn-primary" id="layer_open">Sign
 						up</button>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>

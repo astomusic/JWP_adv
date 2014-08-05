@@ -1,6 +1,6 @@
 package net.asto.domain.users;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.Set;
 
@@ -8,6 +8,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.validation.constraints.AssertTrue;
 
 import net.asto.domain.users.User;
 
@@ -36,4 +37,14 @@ public class UserTest {
 		}
 	}
 
+	@Test
+	public void matchPassword() {
+		String password = "password";
+		Authenticate authenticate = new Authenticate("email", password);
+		User user = new User("", password, password);
+		assertTrue(user.matchPassword(authenticate));
+		
+		authenticate = new Authenticate("email", "password2");
+		assertFalse(user.matchPassword(authenticate));
+	}
 }

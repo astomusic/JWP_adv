@@ -9,6 +9,7 @@ import net.asto.domain.users.User;
 
 import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
@@ -33,8 +34,12 @@ public class UserDao extends JdbcDaoSupport {
 				return new User(rs.getString("email"), rs.getString("password"), rs.getString("passwordConfirm"));
 			}
 		};
+		try {
+			return getJdbcTemplate().queryForObject(sql, rowMapper, email);
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}
 		
-		return getJdbcTemplate().queryForObject(sql, rowMapper, email);
 	}
 
 	public void create(User user) {

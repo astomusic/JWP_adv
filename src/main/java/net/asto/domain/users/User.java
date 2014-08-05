@@ -51,7 +51,12 @@ public class User {
 		this.passwordCheck = this.password.equals(this.passwordConfirm);
 	}
 	
-	
+	public boolean matchPassword(Authenticate authenticate) {
+		if(this.password == null){
+			return false;
+		}
+		return this.password.equals(authenticate.getPassword());
+	}	
 	
 	@Override
 	public int hashCode() {
@@ -94,5 +99,6 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", passwordConfirm=" + passwordConfirm + "]";
 	}
+
 	
 }
