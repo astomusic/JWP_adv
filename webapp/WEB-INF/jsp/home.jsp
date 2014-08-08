@@ -27,30 +27,35 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<c:if test="${empty sessionScope.email}">
-				<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/login" method="post">
-					<div class="form-group">
-						<c:if test="${not empty errorMessage}">
-							<span style="color:red">${errorMessage}</span>
-						</c:if>
-						<form:input path="email" class="form-control" placeholder="Email" />
-						<form:errors path="email" cssClass="error" />
-					</div>
-					<div class="form-group">
-						<form:password path="password" class="form-control" placeholder="Password" />
-						<form:errors path="password" cssClass="error" />
-					</div>
-					<button type="submit" class="btn btn-success">Sign
-						in</button>
-					<button type="submit" class="btn btn-primary" id="layer_open">Sign
-						up</button>
-				</form:form>
+					<form:form modelAttribute="authenticate"
+						cssClass="navbar-form navbar-right" action="/users/login"
+						method="post">
+						<div class="form-group">
+							<c:if test="${not empty errorMessage}">
+								<span style="color: red">${errorMessage}</span>
+							</c:if>
+							<form:input path="email" class="form-control" placeholder="Email" />
+							<form:errors path="email" cssClass="error" />
+						</div>
+						<div class="form-group">
+							<form:password path="password" class="form-control"
+								placeholder="Password" />
+							<form:errors path="password" cssClass="error" />
+						</div>
+						<button type="submit" class="btn btn-success">Sign in</button>
+						<button type="button" class="btn btn-primary" id="layer_open1">Sign
+							up</button>
+					</form:form>
 				</c:if>
 				<c:if test="${not empty sessionScope.email}">
-					<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/logout" method="post">
+					<form:form modelAttribute="authenticate"
+						cssClass="navbar-form navbar-right" action="/users/logout"
+						method="post">
+						<c:if test="${not empty errorMessage}">
+							<span style="color: red">${errorMessage}</span>
+						</c:if>
+						<button type="button" class="btn btn-success" id="layer_open2">${sessionScope.email}</button>
 						<button type="submit" class="btn btn-danger">Logout</button>
-					</form:form>
-					<form:form modelAttribute="authenticate" cssClass="navbar-form navbar-right" action="/users/${sessionScope.email}" method="post">
-						<button type="submit" class="btn btn-success">${sessionScope.email}</button>
 					</form:form>
 				</c:if>
 			</div>
@@ -119,31 +124,63 @@
 
 	<div class="layer" style="display: none;">
 		<div class="bg"></div>
-		<div class="layer_area" id="layer1">
-			<h3>Sign up</h3>
-			<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="post">
-				<div class="form-group">
-					<form:input path="email" class="form-control" placeholder="Email" />
-					<form:errors path="email" cssClass="error" />
-				</div>
-				<div class="form-group">
-					<form:password path="password" class="form-control" placeholder="Password" />
-					<form:errors path="password" cssClass="error" />
-				</div>
-				<div class="form-group">
-					<form:password path="passwordConfirm" class="form-control" placeholder="Password Confirm" />
-					<form:errors path="passwordConfirm" cssClass="error" />
-				</div>
-				<br>
-				<div class="form-group">
-					<div class="controls">
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<button class="btn btn-danger" id="layer_close">Close</button>
-					</div>
-				</div>
-			</form:form>
+		<div class="layer_area" id="layer1">	
+			<c:choose>
+				<c:when test="${empty sessionScope.email}">
+					<h3>Welcome! Sign up</h3>
+					<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="POST">
+						<div class="form-group">
+							<form:input path="email" class="form-control" placeholder="Email" />
+							<form:errors path="email" cssClass="error" />
+						</div>
+						<div class="form-group">
+							<form:password path="password" class="form-control" placeholder="Password" />
+							<form:errors path="password" cssClass="error" />
+						</div>
+						<div class="form-group">
+							<form:password path="passwordConfirm" class="form-control" placeholder="Password Confirm" />
+							<form:errors path="passwordConfirm" cssClass="error" />
+						</div>
+						<br>
+						<div class="form-group">
+							<div class="controls">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="button" class="btn btn-danger" id="layer1_close">Close</button>
+							</div>
+						</div>
+					</form:form>
+				</c:when>
+				<c:otherwise>
+					<h3>User Information</h3>
+					<form:form modelAttribute="ChangeUser" cssClass="form-horizontal" action="/users/modify/${sessionScope.email}" method="PUT">
+						<div class="form-group">
+							${sessionScope.email}
+						</div>
+						<div class="form-group">
+							<form:password path="oldPassword" class="form-control" placeholder="Old Password" />
+							<form:errors path="oldPassword" cssClass="error" />
+						</div>
+						<div class="form-group">
+							<form:password path="newPassword" class="form-control" placeholder="New Password" />
+							<form:errors path="newPassword" cssClass="error" />
+						</div>
+						<div class="form-group">
+							<form:password path="newPasswordConfirm" class="form-control" placeholder="New Password Confirm" />
+							<form:errors path="newPasswordConfirm" cssClass="error" />
+						</div>
+						<br>
+						<div class="form-group">
+							<div class="controls">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="button" class="btn btn-danger" id="layer2_close">Close</button>
+							</div>
+						</div>
+					</form:form>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
+
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

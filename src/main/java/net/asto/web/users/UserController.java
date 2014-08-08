@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import net.asto.dao.users.UserDao;
 import net.asto.domain.users.Authenticate;
+import net.asto.domain.users.ChangeUser;
 import net.asto.domain.users.User;
 
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -75,6 +77,45 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/users/modify/{userEmail:.+}", method=RequestMethod.PUT)
+	public String update(@PathVariable String userEmail, @Valid ChangeUser changeUser, BindingResult bindingResult, Model model, HttpSession session) {
+		logger.info("ChangeUser :" + changeUser);
+		
+		Object email = session.getAttribute("email");
+		
+		if(email == null) {
+			this.setErrorMessage("로그인 상태가 아닙니다.", model);
+			return "home";
+		} else if(!userEmail.equals((String)email)) {
+			this.setErrorMessage("해당 유저가 아닙니다.", model);
+			return "home";
+		}
+		
+		User user = userDao.findByEmail((String)email);
+
+		if(bindingResult.hasErrors()) {
+			logger.info("bindingResult has error");
+			List<ObjectError> errors = bindingResult.getAllErrors();
+			for (ObjectError error : errors) {
+				logger.info("error : " + error.getDefaultMessage());
+				this.setErrorMessage(error.getDefaultMessage(), model);
+			}
+			return "home";
+		}
+		
+		if(!changeUser.getOldPassword().equals(user.getPassword())) {
+			this.setErrorMessage("비밀번호가 틀립니다.", model);
+			return "home";
+		}
+		
+		user.setPassword(changeUser.getNewPassword());
+		user.setPasswordConfirm(changeUser.getNewPasswordConfirm());
+
+		userDao.update(user);
+		logger.info("DataBase :" + userDao.findByEmail(user.getEmail()));
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value="/users/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("email");
@@ -86,5 +127,6 @@ public class UserController {
 		model.addAttribute("user", new User());
 		model.addAttribute("authenticate", new Authenticate());
 		model.addAttribute("errorMessage", errorMessage);
+		model.addAttribute("ChangeUser", new ChangeUser());
 	}
 }
