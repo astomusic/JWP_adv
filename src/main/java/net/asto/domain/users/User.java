@@ -58,6 +58,20 @@ public class User {
 		return this.password.equals(authenticate.getPassword());
 	}	
 	
+	public boolean matchEmail(String inputEmail) {
+		if(inputEmail == null){
+			return false;
+		} 
+		return inputEmail.equals(this.email);
+	}
+	
+	public User update(User updateUser) {
+		if(!matchEmail(updateUser.email)) {
+			throw new IllegalArgumentException();
+		}
+		return new User(this.email, updateUser.password, updateUser.passwordConfirm);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,6 +113,8 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", passwordConfirm=" + passwordConfirm + "]";
 	}
+
+	
 
 	
 }

@@ -8,9 +8,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.validation.constraints.AssertTrue;
-
-import net.asto.domain.users.User;
 
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
@@ -46,5 +43,22 @@ public class UserTest {
 		
 		authenticate = new Authenticate("email", "password2");
 		assertFalse(user.matchPassword(authenticate));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void updateWhenMisMatchEmail() {
+		User user = new User("email", "password", "password");
+		User updateUser = new User("newEmail", "newPassword", "newPassword");
+		user.update(updateUser);
+	}
+
+	@Test
+	public void update() {
+		User user = new User("email", "password", "password");
+		User updateUser = new User("email", "newPassword", "newPassword");
+		User updatedUser = user.update(updateUser);
+		
+		assertEquals(updatedUser, updateUser);
+		
 	}
 }
