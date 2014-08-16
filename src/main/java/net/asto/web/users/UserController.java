@@ -26,6 +26,7 @@ public class UserController {
 	
 	@Autowired
 	private UserDao userDao;
+
 	
 	@RequestMapping(value="/users", method=RequestMethod.POST)
 	public String create(@Valid User user, BindingResult bindingResult, Model model) {

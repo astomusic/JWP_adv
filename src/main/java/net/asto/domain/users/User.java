@@ -3,10 +3,12 @@ package net.asto.domain.users;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Size;
 
+import org.apache.ibatis.type.Alias;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Alias("user")
 public class User {
 	public static Logger logger = Logger.getLogger(User.class);
 	

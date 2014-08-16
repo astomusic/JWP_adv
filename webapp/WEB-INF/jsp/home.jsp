@@ -11,6 +11,8 @@
 <title>JWP_adv</title>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/layerpopup.css" rel="stylesheet">
+<link href="/css/tumbler.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -81,13 +83,13 @@
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-4">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.</p>
+				<h2>Water In Tumbler</h2>
+				<div id="testwarp">
+					<div id="test"></div>
+				</div>
+				
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
+					<a class="btn btn-default" href="#" role="button">refresh
 						&raquo;</a>
 				</p>
 			</div>
@@ -185,8 +187,8 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/layerpopup.js">
-		
+	<script src="/js/layerpopup.js"></script>
+	<script src="/js/tumbler.js"></script>
 	</script>
 </body>
 </html>
