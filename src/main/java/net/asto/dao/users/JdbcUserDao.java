@@ -2,6 +2,7 @@ package net.asto.dao.users;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -62,6 +63,12 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
 	public void update(User user) {
 		String sql = "UPDATE USERS SET password = ?, passwordConfirm = ? WHERE email = ?";
 		getJdbcTemplate().update(sql, user.getPassword(), user.getPasswordConfirm(), user.getEmail());		
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

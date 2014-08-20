@@ -1,13 +1,16 @@
 package net.asto.dao.users;
 
+import java.util.List;
+
 import net.asto.domain.users.User;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class MybatisUserDao implements UserDao {
-	public static Logger logger = Logger.getLogger(MybatisUserDao.class);
-	
+	@Autowired
 	private SqlSession sqlSession;
 	
 	public void setSqlSession(SqlSession sqlSession) {
@@ -29,6 +32,11 @@ public class MybatisUserDao implements UserDao {
 	public void update(User user) {
 		sqlSession.insert("UserMapper.update", user);
 
+	}
+
+	@Override
+	public List<User> findAll() {
+		return sqlSession.selectList("UserMapper.findAll");
 	}
 
 }

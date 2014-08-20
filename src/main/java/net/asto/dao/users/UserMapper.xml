@@ -8,6 +8,16 @@
 		email = #{email}
 	</select>
 
+	<resultMap id="userList" type="user">
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="passwordConfirm" column="passwordConfirm" />
+	</resultMap>
+
+	<select id="findAll" resultMap="userList">
+		SELECT * FROM USERS
+	</select>
+
 	<insert id="create">
 		INSERT INTO USERS
 		VALUES(#{email},#{password},#{passwordConfirm})
@@ -23,7 +33,8 @@
 	</update>
 
 	<select id="TumblerSelect" resultType="net.asto.web.hci.Tumbler">
-		SELECT * FROM TUMBLER WHERE id = #{id}
+		SELECT * FROM TUMBLER
+		WHERE id = #{id}
 	</select>
 
 </mapper>

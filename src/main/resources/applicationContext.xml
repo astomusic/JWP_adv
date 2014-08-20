@@ -7,6 +7,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<context:component-scan base-package="net.asto.dao">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 	<context:annotation-config />
 
@@ -22,12 +25,6 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-
-	<!-- <bean id="userDao" class="net.asto.dao.users.JdbcUserDao" p:dataSource-ref="dataSource" 
-		/> -->
-
-	<bean id="userDao" class="net.asto.dao.users.MybatisUserDao"
-		p:sqlSession-ref="sqlSession" />
 
 	<bean id="TumblerDao" class="net.asto.web.hci.TumblerDao"
 		p:sqlSession-ref="sqlSession" />
