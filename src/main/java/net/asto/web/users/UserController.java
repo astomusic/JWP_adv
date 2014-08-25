@@ -125,6 +125,7 @@ public class UserController {
 	public String list(Model model) {
 		List<User> userList = userDao.findAll();
 		model.addAttribute("userList", userList);
+		this.setErrorMessage("", model);
 		return "home";
 	}
 
